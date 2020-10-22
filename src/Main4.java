@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * tw笔试
+ * 路程问题
+ */
 public class Main4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -19,7 +23,6 @@ public class Main4 {
             trMap.put(star, zMap);
 
         }
-        //  AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
         // 1
         try {
             System.out.println(find1(trMap, "A", "B") + find1(trMap, "B", "C"));
