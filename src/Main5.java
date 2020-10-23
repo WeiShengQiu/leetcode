@@ -1,9 +1,13 @@
+import java.awt.print.Book;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * tw笔试
  */
 public class Main5 {
+    private static Integer sum = 0;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         List<Work> list = new ArrayList<>(16);
@@ -27,7 +31,9 @@ public class Main5 {
             list.add(work);
         }
 
-        Integer sum = 0;
+        // 排序
+        Collections.sort(list);
+
         for (Work work : list) {
             sum = sum + work.getTime();
         }
@@ -36,36 +42,51 @@ public class Main5 {
         int trackNum = 1;
 
         while (sum > 0) {
-            meetSet(list, 180, sum, true);
-            meetSet(list, 240, sum, true);
+            System.out.println("Track " + trackNum + ":");
+            meetSet(list, trackAM, true);
+            meetSet(list, trackPM, false);
             trackNum++;
         }
-        if (trackAM <= 0 && trackPM <= 60 && sum <= 360) {
-            trackNum++;
-            trackAM = 180;
-            trackPM = 240;
-        }
-
-        System.out.println(sum);
-        System.out.println(list);
     }
 
-    private static void meetSet(List<Work> list, int track, int sum, boolean isAm) {
+    private static void meetSet(List<Work> list, int track, boolean isAm) {
         // AM 180min PM 240min
-        for (Work work : list) {
+        // 设置时间
+        Calendar cal = Calendar.getInstance();
+        if (isAm) {
+            cal.set(Calendar.HOUR_OF_DAY, 9);
+        } else {
+            cal.set(Calendar.HOUR_OF_DAY, 13);
+        }
+        cal.set(Calendar.MINUTE, 0);
+
+        Iterator<Work> it = list.iterator();
+        while (it.hasNext()) {
+            Work work = it.next();
             int finalTrack = track;
             boolean amFull = list.stream().filter(item -> item.getTime().equals(finalTrack)).findAny().isPresent();
-            if (track > work.getTime()) {
+            if (track >= work.getTime()) {
                 track = track - work.getTime();
                 sum = sum - work.getTime();
-                System.out.println(work.getMessage());
+                it.remove();
+                System.out.println(new SimpleDateFormat("HH:mm a").format(cal.getTime()) + " " + work.getMessage());
+                cal.add(Calendar.MINUTE, work.getTime());
             } else if (amFull) {
                 continue;
             }
         }
+
+        // 输出结束
+        if (track == 0 && isAm) {
+            System.out.println(new SimpleDateFormat("HH:mm a").format(cal.getTime()) + " Lunch");
+        } else if (track <= 60 && !isAm) {
+            cal.set(Calendar.HOUR_OF_DAY, 17);
+            cal.set(Calendar.MINUTE, 0);
+            System.out.println(new SimpleDateFormat("HH:mm a").format(cal.getTime()) + " Networking Event");
+        }
     }
 
-    static class Work {
+    static class Work implements Comparable<Work> {
         private Integer time;
         private String message;
 
@@ -91,6 +112,12 @@ public class Main5 {
                     "time=" + time +
                     ", message='" + message + '\'' +
                     '}';
+        }
+
+        @Override
+        public int compareTo(Work w) {
+//            return this.id - o.id; //升序
+            return w.getTime() - this.getTime();  //降序
         }
     }
 }
