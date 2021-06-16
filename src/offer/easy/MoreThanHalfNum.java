@@ -1,4 +1,4 @@
-package offer;
+package offer.easy;
 
 public class MoreThanHalfNum {
     public static int MoreThanHalfNum(int[] array) {

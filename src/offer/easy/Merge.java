@@ -1,4 +1,4 @@
-package offer;
+package offer.easy;
 
 import java.util.Objects;
 

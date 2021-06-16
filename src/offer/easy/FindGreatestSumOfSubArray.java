@@ -1,4 +1,4 @@
-package offer;
+package offer.easy;
 
 public class FindGreatestSumOfSubArray {
     public static int FindGreatestSumOfSubArray(int[] array) {
