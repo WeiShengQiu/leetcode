@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 
 
-public class printListFromTailToHead {
+public class PrintListFromTailToHead {
     public class ListNode {
         int val;
         ListNode next = null;
