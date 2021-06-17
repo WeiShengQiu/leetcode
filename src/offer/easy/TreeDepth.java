@@ -5,7 +5,7 @@ package offer.easy;
  *
  * @author: wangshiqi
  * @DateTime: 2021/6/17 15:16
- * @Description: 
+ * @Description:
  */
 public class TreeDepth {
     public class TreeNode {

@@ -1,8 +1,6 @@
 package offer.easy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,20 +21,22 @@ public class KthNode {
         }
     }
 
+    ArrayList<TreeNode> list = new ArrayList<>();
+
     TreeNode KthNode(TreeNode pRoot, int k) {
-        if (pRoot.left != null) {
-
+        PrintFromTopToBottom(pRoot);
+        if (k >= 1 && list.size() >= k) {
+            return list.get(k - 1);
         }
-        if (pRoot.right != null) {
+        return null;
 
-        }
     }
 
-    public void depth(TreeNode pRoot, List<Integer> list) {
-        while (pRoot != null) {
-            list.add(pRoot.val);
-            depth(pRoot.left, list);
-            depth(pRoot.right, list);
+    public void PrintFromTopToBottom(TreeNode root) {
+        if (root != null) {
+            PrintFromTopToBottom(root.left);
+            list.add(root);
+            PrintFromTopToBottom(root.right);
         }
     }
 }
