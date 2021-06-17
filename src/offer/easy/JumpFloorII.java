@@ -1,6 +1,5 @@
 package offer.easy;
 
-import com.sun.tools.javac.Main;
 
 public class JumpFloorII {
     public int jumpFloorII(int target) {
