@@ -14,6 +14,7 @@ public class Power {
         return result;
     }
 
+    
     public static void main(String[] args) {
         System.out.println(power(2.0000d, -2));
     }
