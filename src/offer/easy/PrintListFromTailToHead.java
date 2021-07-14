@@ -25,12 +25,12 @@ public class PrintListFromTailToHead {
 
     ArrayList<Integer> list = new ArrayList<>();
 
-    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+    public int[] printListFromTailToHead(ListNode listNode) {
 
         if (Objects.nonNull(listNode)) {
             printListFromTailToHead(listNode.next);
             list.add(listNode.val);
         }
-        return list;
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 }
